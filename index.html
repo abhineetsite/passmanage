@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+
+    <title>Passmanage | Chrome Extension</title>
+</head>
+
+<body>
+    <main>
+        <div class="hero"><span class="hero__lead">Pass</span> Manage <span class="hero__lead"> - Password Manager</span></div>
+        <label for="input-el">Your Account URL:</label>
+        <input type="text" id="input-el" placeholder="www.google.com">
+
+        <div class="buttons">
+            <button class="btn" id="input-btn">SAVE LEAD</button>
+            <button class="btn" id="tab-btn">SAVE TAB</button>
+            <button class="btn" id="delete-btn">DELETE ALL <i>(double click)</i></button>
+        </div>
+
+        <ul id="ul-el"></ul>
+        <footer>
+            <div class="attribution">
+                <span> Created by <a href="https://abhineet.site" target="_blank"
+                        class="underline-animation">Abhineet</a>.<br>
+                    Examine code: <a href="https://github.com/abhineetsite" target="_blank" class="underline-animation">Abhineet's Github</a>.</span>
+            </div>
+        </footer>
+
+        <script src="scripts/index.js"></script>
+</body>
+
+</html>

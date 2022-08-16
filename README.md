@@ -1,6 +1,3 @@
-# passmanage
-A chrome extention to manage you passwords
-
 ### How to install
 
 - Clone Repo or Download Zip
@@ -13,4 +10,5 @@ A chrome extention to manage you passwords
 - Website - [Abhineet](https://www.abhineet.site)
 
 ## Acknowledgments
-- Code - [Abhineet](https://github.com/abhineetsite) 
+
+Code - [Abhineet](https://github.com/abhineetsite) 
