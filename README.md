@@ -1,5 +1,7 @@
 ### How to install
 
+Currently in development.
+
 - Clone Repo or Download Zip
 - Visit chrome://extensions/ and turn on "Developer mode"
 - Click "Load unpacked" button and navigate to the folder you downloaded
