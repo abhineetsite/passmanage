@@ -1,10 +1,12 @@
 {
-  "manifest_version": 3,
-  "version": "1.0",
-  "name": "Pass Manage",
-  "action": {
-    "default_popup": "index.html",
-    "default_icon": "images/icon.png"
-  },
-  "permissions": ["tabs"]
+  "manifest_version": 2,
+  "name": "PASSMANAGE",
+  "description": "Passmanage is a password manager that allows you to securely store your login information locally on your device. With an easy-to-use interface and the added peace of mind that comes with local storage",
+  "version": "1.0.0",
+  "permissions": [
+    "storage"
+  ],
+  "browser_action": {
+    "default_popup": "index.html"
+  }
 }
