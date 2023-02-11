@@ -1,11 +1,4 @@
-### How to install
-
-Currently in development.
-
-- Clone Repo or Download Zip
-- Visit chrome://extensions/ and turn on "Developer mode"
-- Click "Load unpacked" button and navigate to the folder you downloaded
-- That's it! Enjoy!! 🎉
+Passmanage chrome extension is a simple password manager that allows you to securely store your login information locally on your device. With an easy-to-use interface and the added peace of mind that comes with local storage, this extension is the perfect solution for anyone looking to protect their sensitive information.
 
 ## Author
 
