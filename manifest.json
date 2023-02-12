@@ -1,12 +1,21 @@
 {
   "manifest_version": 2,
-  "name": "PASSMANAGE",
-  "description": "Passmanage is a password manager that allows you to securely store your login information locally on your device. With an easy-to-use interface and the added peace of mind that comes with local storage",
+  "name": "PassManage",
   "version": "1.0.0",
-  "permissions": [
-    "storage"
-  ],
+  "description": "A chrome extension to manage your passwords locally and securely.",
   "browser_action": {
     "default_popup": "index.html"
-  }
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.jsdelivr.net; object-src 'self'",
+  "web_accessible_resources": [
+    "index.html",
+    "background.js",
+    "bulma.min.css",
+    "html2canvas.min.js",
+    "jspdf.min.js"
+  ]
 }

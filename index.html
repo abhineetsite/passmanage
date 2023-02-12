@@ -2,41 +2,73 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>PASS MANAGE</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
+  <title>PassManage</title>
 </head>
 
 <body>
-  <h1>PASS MANAGE</h1>
-  <form>
-    <div class="form-group">
-      <label for="url">URL:</label>
-      <input type="text" id="url" required>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">PassManage</h1>
+      <form id="password-form">
+        <div class="field">
+          <label class="label">URL</label>
+          <div class="control">
+            <input type="text" class="input" id="url">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Username</label>
+          <div class="control">
+            <input type="text" class="input" id="username">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Password</label>
+          <div class="control">
+            <input type="password" class="input" id="password">
+          </div>
+        </div>
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-link" id="save-button">Save</button>
+          </div>
+          <div class="control">
+            <button class="button is-link" id="edit-button">Edit</button>
+          </div>
+          <div class="control">
+            <button class="button is-link" id="delete-button">Delete</button>
+          </div>
+        </div>
+      </form>
+      <hr>
+      <h2 class="subtitle">Latest Saved Password</h2>
+      <div id="latest-password"></div>
+      <button class="button is-primary" id="show-passwords-button">Show Passwords </button>
+      <div id="password-history" style="display: none;">
+        <h2 class="subtitle">Password History</h2>
+        <table id="password-table">
+          <thead>
+            <tr>
+              <th>URL</th>
+              <th>Username</th>
+              <th>Password</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="password-list">
+          </tbody>
+        </table>
+        <button class="button is-danger" id="hide-passwords-button"> Hide Passwords </button>
+      </div>
+      <hr>
+      <button class="button is-link" id="download-pdf-button">Download as PDF</button>
     </div>
-    <div class="form-group">
-      <label for="username">Username:</label>
-      <input type="text" id="username" required>
-    </div>
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="password" id="password" required>
-    </div>
-    <button type="submit" id="submit">Add</button>
-  </form>
-  <table>
-    <thead>
-      <tr>
-        <th>URL</th>
-        <th>Username</th>
-        <th>Password</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody id="data">
-    </tbody>
-  </table>
-  <script src="app.js"></script>
+  </section>
 </body>
+<script src="background.js"></script>
 
 </html>
