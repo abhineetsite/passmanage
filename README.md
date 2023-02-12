@@ -2,7 +2,7 @@ Passmanage chrome extension is a simple password manager that allows you to secu
 
 ## Author
 
-- Website - [Abhineet](https://www.abhineet.site)
+- Website - [Abhineet](https://abhineet.site)
 
 ## Acknowledgments
 
