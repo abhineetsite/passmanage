@@ -86,7 +86,21 @@ hidePasswordsButton.addEventListener('click', (event) => {
   hidePasswordHistory();
 });
 
-// Handle password history delete button click
+// Edit last password
+editButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  let passwords = JSON.parse(localStorage.getItem('passwords')) || [];
+  let password = passwords[0];
+  if (!password) {
+    return;
+  }
+  urlInput.value = password.url;
+  usernameInput.value = password.username;
+  passwordInput.value = password.password;
+});
+
+
+/* // Handle password history delete button click
 passwordList.addEventListener('click', (event) => {
   if (event.target.classList.contains('delete-history-button')) {
     let passwordRow = event.target.parentElement.parentElement;
@@ -100,7 +114,24 @@ passwordList.addEventListener('click', (event) => {
     localStorage.setItem('passwords', JSON.stringify(passwords));
     renderPasswordHistory();
   }
+}); */
+
+// Handle password history delete button click
+passwordList.addEventListener('click', (event) => {
+  if (event.target.classList.contains('delete-history-button')) {
+    let passwordRow = event.target.parentElement.parentElement;
+    let url = passwordRow.children[0].textContent;
+    let username = passwordRow.children[1].textContent;
+    let password = passwordRow.children[2].textContent;
+    let passwords = JSON.parse(localStorage.getItem('passwords')) || [];
+    passwords = passwords.filter(passwordData => {
+      return passwordData.url !== url || passwordData.username !== username || passwordData.password !== password;
+    });
+    localStorage.setItem('passwords', JSON.stringify(passwords));
+    renderPasswordHistory();
+  }
 });
+
 
 // Handle download as PDF button click
 downloadPdfButton.addEventListener('click', (event) => {
