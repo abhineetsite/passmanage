@@ -100,22 +100,6 @@ editButton.addEventListener('click', (e) => {
 });
 
 
-/* // Handle password history delete button click
-passwordList.addEventListener('click', (event) => {
-  if (event.target.classList.contains('delete-history-button')) {
-    let passwordRow = event.target.parentElement.parentElement;
-    let url = passwordRow.children[0].textContent;
-    let username = passwordRow.children[1].textContent;
-    let password = passwordRow.children[2].textContent;
-    let passwords = JSON.parse(localStorage.getItem('passwords')) || [];
-    passwords = passwords.filter(password => {
-      return password.url !== url || password.username !== username || password.password !== password;
-    });
-    localStorage.setItem('passwords', JSON.stringify(passwords));
-    renderPasswordHistory();
-  }
-}); */
-
 // Handle password history delete button click
 passwordList.addEventListener('click', (event) => {
   if (event.target.classList.contains('delete-history-button')) {
@@ -132,15 +116,25 @@ passwordList.addEventListener('click', (event) => {
   }
 });
 
-
 // Handle download as PDF button click
-downloadPdfButton.addEventListener('click', (event) => {
-  html2canvas(document.querySelector('#password-history')).then(canvas => {
-    //var jspdf = require('https://cdn.jsdelivr.net/npm/jspdf@1.5.3/dist/jspdf.min.js');
-    let pdf = new jsPDF();
-    pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0);
-    pdf.save('passwords.pdf');
-  });
+document.getElementById("download-pdf-button").addEventListener("click", function () {
+  const passwordTable = document.getElementById("password-table");
+  const passwordList = document.getElementById("password-list");
+
+  // Create a new instance of the jsPDF object
+  var doc = new jsPDF();
+
+  // Add the data from the password table to the PDF
+  for (var i = 0; i < passwordList.rows.length; i++) {
+    var url = passwordList.rows[i].cells[0].innerHTML;
+    var username = passwordList.rows[i].cells[1].innerHTML;
+    var password = passwordList.rows[i].cells[2].innerHTML;
+
+    doc.text(20, 20 + (i * 10), url + " / " + username + " / " + password);
+  }
+
+  // Download the PDF
+  doc.save("passwords.pdf");
 });
 
 renderLatestPassword();
