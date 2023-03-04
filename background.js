@@ -74,11 +74,13 @@ passwordForm.addEventListener('submit', (event) => {
   savePassword(password);
   passwordForm.reset();
   renderLatestPassword();
+  passwordForm.scrollIntoView({behavior: "smooth"});
 });
 
 // Handle show passwords button click
 showPasswordsButton.addEventListener('click', (event) => {
-  showPasswordHistory();
+  showPasswordHistory()
+  showPasswordsButton.scrollIntoView();
 });
 
 // Handle hide passwords button click

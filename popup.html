@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jspdf@1.5.3/dist/jspdf.min.js"></script>
-
   <title>PassManage</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+   <section class="hero is-primary is-bold">
+    <!--<div class="hero-body">-->
+      <div class="container has-text-centered">
+        <h1 class="title">Pass<br>Manage</h1>
+      <!--</div>-->
+    </div>
+  </section> 
   <section class="section">
     <div class="container">
-      <h1 class="title">PassManage</h1>
       <form id="password-form">
         <div class="field">
           <label class="label">URL</label>
@@ -36,44 +38,41 @@
         </div>
         <div class="field is-grouped">
           <div class="control">
-            <button class="button is-link" id="save-button">Save</button>
+            <button class="button is-primary" id="save-button">Save</button>
           </div>
           <div class="control">
             <button class="button is-link" id="edit-button">Edit Last</button>
           </div>
-          <!-- <div class="control">
-            <button class="button is-link" id="delete-button">Delete</button>
-          </div>
-          <div class="control">
-            <button class="button is-danger" id="clear-button">Clear</button>
-          </div> -->
         </div>
       </form>
       <hr>
       <h2 class="subtitle">Latest Saved Password</h2>
       <div id="latest-password"></div>
-      <button class="button is-primary" id="show-passwords-button">Show Passwords </button>
+      <button class="button is-primary is-outlined" id="show-passwords-button">Show Passwords</button>
       <div id="password-history" style="display: none;">
         <h2 class="subtitle">Password History</h2>
-        <table id="password-table">
-          <thead>
-            <tr>
-              <th>URL</th>
-              <th>Username</th>
-              <th>Password</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="password-list">
-          </tbody>
-        </table>
-        <button class="button is-danger" id="hide-passwords-button"> Hide Passwords </button>
+        <div class="table-container">
+          <table class="table is-bordered is-fullwidth">
+            <thead>
+              <tr>
+                <th>URL</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="password-list">
+            </tbody>
+          </table>
+        </div>
+        <button class="button is-danger is-outlined" id="hide-passwords-button">Hide Passwords</button>
       </div>
       <hr>
-      <button class="button is-link" id="download-pdf-button">Download as PDF</button>
+      <button class="button is-primary" id="download-pdf-button">Download as PDF</button>
     </div>
   </section>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="background.js"></script>
 </body>
-<script src="background.js"></script>
-
 </html>

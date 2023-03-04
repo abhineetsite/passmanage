@@ -1,0 +1,115 @@
+/* Global styles */
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .subtitle {
+    font-size: 1.8rem;
+    margin-top: 2rem;
+  }
+  
+  /* Form styles */
+  .field label {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .field .control {
+    margin-bottom: 1rem;
+  }
+  
+  .input {
+    width: 100%;
+    height: 2.5rem;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 0.3rem;
+    box-shadow: none;
+    transition: border-color 0.2s ease-in-out;
+  }
+  
+  .input:focus {
+    border-color: #3273dc;
+    box-shadow: 0 0 0 0.1rem rgba(50, 115, 220, 0.25);
+  }
+  
+  .button {
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 0.3rem;
+    box-shadow: none;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  }
+  
+  .button.is-link {
+    background-color: #3273dc;
+    border-color: #3273dc;
+    color: #fff;
+  }
+  
+  .button.is-link:hover {
+    background-color: #2769c4;
+    border-color: #2769c4;
+  }
+  
+  .button.is-danger {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+    color: #fff;
+  }
+  
+  .button.is-danger:hover {
+    background-color: #c0392b;
+    border-color: #c0392b;
+  }
+  
+  /* Password history table styles */
+  #password-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  #password-table th {
+    font-weight: bold;
+    text-align: left;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  #password-table td {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  #password-table .delete-history-button {
+    font-size: 1.2rem;
+    background-color: transparent;
+    border: none;
+    color: #e74c3c;
+  }
+  
+  #password-table .delete-history-button:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  
+  
+  
+  
+  
