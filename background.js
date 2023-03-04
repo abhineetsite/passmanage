@@ -45,6 +45,7 @@ const renderPasswordHistory = () => {
       <td>${password.username}</td>
       <td>${password.password}</td>
       <td>
+        <button class="edit-history-button">Edit</button>
         <button class="delete-history-button">Delete</button>
       </td>
     `;
@@ -117,6 +118,21 @@ passwordList.addEventListener('click', (event) => {
     renderPasswordHistory();
   }
 });
+
+// Handle password history edit button click
+passwordList.addEventListener('click', (event) => {
+  if (event.target.classList.contains('edit-history-button')) {
+    let passwordRow = event.target.parentElement.parentElement;
+    let url = passwordRow.children[0].textContent;
+    let username = passwordRow.children[1].textContent;
+    let password = passwordRow.children[2].textContent;
+    urlInput.value = url;
+    usernameInput.value = username;
+    passwordInput.value = password;
+    window.scrollTo(0, 0);
+  }
+});
+
 
 // Handle download as PDF button click
 document.getElementById("download-pdf-button").addEventListener("click", function () {
