@@ -11,6 +11,7 @@ const passwordList = document.getElementById('password-list');
 const showPasswordsButton = document.getElementById('show-passwords-button');
 const hidePasswordsButton = document.getElementById('hide-passwords-button');
 const downloadPdfButton = document.getElementById('download-pdf-button');
+let editIndicator = false; //A@
 
 // Save password to local storage
 const savePassword = (password) => {
@@ -75,18 +76,28 @@ passwordForm.addEventListener('submit', (event) => {
   savePassword(password);
   passwordForm.reset();
   renderLatestPassword();
-  passwordForm.scrollIntoView({behavior: "smooth"});
+  location.reload(); //A@
+  passwordForm.scrollIntoView({ behavior: "smooth" });
 });
 
 // Handle show passwords button click
 showPasswordsButton.addEventListener('click', (event) => {
   showPasswordHistory()
-  showPasswordsButton.scrollIntoView();
+  showPasswordsButton.scrollIntoView({ behavior: "smooth" });
+  // A@hide button and scroll down smoothly  
+  showPasswordsButton.classList.add('hidden');
+  showPasswordsButton.scrollIntoView({
+    behavior: 'smooth',
+    //block: 'nearest',
+    //inline: 'center'
+  });
 });
 
 // Handle hide passwords button click
 hidePasswordsButton.addEventListener('click', (event) => {
   hidePasswordHistory();
+  // A@show buttom
+  showPasswordsButton.classList.remove('hidden');
 });
 
 // Edit last password
@@ -100,22 +111,37 @@ editButton.addEventListener('click', (e) => {
   urlInput.value = password.url;
   usernameInput.value = password.username;
   passwordInput.value = password.password;
+  //A@ delete current password from password history
+  deletePasswordUsable(password.url, password.username, password.password);
 });
 
+// A@Delete password
+const deletePassword = () => {
+  let passwordRow = event.target.parentElement.parentElement;
+  let url = passwordRow.children[0].textContent;
+  let username = passwordRow.children[1].textContent;
+  let password = passwordRow.children[2].textContent;
+  let passwords = JSON.parse(localStorage.getItem('passwords')) || [];
+  passwords = passwords.filter(passwordData => {
+    return passwordData.url !== url || passwordData.username !== username || passwordData.password !== password;
+  });
+  localStorage.setItem('passwords', JSON.stringify(passwords));
+  renderPasswordHistory();
+};
+
+//A@Delete password Usable
+const deletePasswordUsable = (url, username, password) => {
+  let passwords = JSON.parse(localStorage.getItem('passwords')) || [];
+  passwords = passwords.filter(passwordData => {
+    return passwordData.url !== url || passwordData.username !== username || passwordData.password !== password;
+  });
+  localStorage.setItem('passwords', JSON.stringify(passwords));
+}
 
 // Handle password history delete button click
 passwordList.addEventListener('click', (event) => {
   if (event.target.classList.contains('delete-history-button')) {
-    let passwordRow = event.target.parentElement.parentElement;
-    let url = passwordRow.children[0].textContent;
-    let username = passwordRow.children[1].textContent;
-    let password = passwordRow.children[2].textContent;
-    let passwords = JSON.parse(localStorage.getItem('passwords')) || [];
-    passwords = passwords.filter(passwordData => {
-      return passwordData.url !== url || passwordData.username !== username || passwordData.password !== password;
-    });
-    localStorage.setItem('passwords', JSON.stringify(passwords));
-    renderPasswordHistory();
+    deletePassword(); //M@
   }
 });
 
@@ -129,6 +155,8 @@ passwordList.addEventListener('click', (event) => {
     urlInput.value = url;
     usernameInput.value = username;
     passwordInput.value = password;
+    //A@ delete current password from password history
+    deletePasswordUsable(url, username, password);
     window.scrollTo(0, 0);
   }
 });

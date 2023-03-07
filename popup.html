@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,14 +8,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-   <section class="hero is-primary is-bold">
+  <section class="hero is-primary is-bold">
     <!--<div class="hero-body">-->
-      <div class="container has-text-centered">
-        <h1 class="title">Pass<br>Manage</h1>
+    <div class="container has-text-centered" style="padding: 1rem;">
+      <h1 class="title" is-size-1>Pass<br>Manage</h1>
       <!--</div>-->
     </div>
-  </section> 
+  </section>
   <section class="section">
     <div class="container">
       <form id="password-form">
@@ -36,6 +38,7 @@
             <input type="password" class="input" id="password">
           </div>
         </div>
+        <br>
         <div class="field is-grouped">
           <div class="control">
             <button class="button is-primary" id="save-button">Save</button>
@@ -48,6 +51,7 @@
       <hr>
       <h2 class="subtitle">Latest Saved Password</h2>
       <div id="latest-password"></div>
+      <br>
       <button class="button is-primary is-outlined" id="show-passwords-button">Show Passwords</button>
       <div id="password-history" style="display: none;">
         <h2 class="subtitle">Password History</h2>
@@ -75,4 +79,5 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
   <script src="background.js"></script>
 </body>
+
 </html>
