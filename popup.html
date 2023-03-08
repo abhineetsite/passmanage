@@ -6,17 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PassManage</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <section class="hero is-primary is-bold">
-    <!--<div class="hero-body">-->
+  <!-- <section class="hero is-primary is-bold">
     <div class="container has-text-centered" style="padding: 1rem;">
       <h1 class="title" is-size-1>Pass<br>Manage</h1>
-      <!--</div>-->
+    </div>
+  </section> -->
+  <section class="hero is-primary is-bold">
+    <div class="container has-text-centered" style="padding: 1rem;">
+      <img src="logo.png" style="max-width: 200px;" alt="PassManage Logo">
     </div>
   </section>
+  <div id="message"></div>
   <section class="section">
     <div class="container">
       <form id="password-form">
@@ -76,7 +81,7 @@
     </div>
   </section>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/pdfmake.min.js"></script>
   <script src="background.js"></script>
 </body>
 

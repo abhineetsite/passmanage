@@ -11,7 +11,6 @@ const passwordList = document.getElementById('password-list');
 const showPasswordsButton = document.getElementById('show-passwords-button');
 const hidePasswordsButton = document.getElementById('hide-passwords-button');
 const downloadPdfButton = document.getElementById('download-pdf-button');
-let editIndicator = false; //A@
 
 // Save password to local storage
 const savePassword = (password) => {
@@ -74,10 +73,11 @@ passwordForm.addEventListener('submit', (event) => {
     password: passwordInput.value
   };
   savePassword(password);
+  alert('Credentials saved! (scroll down and click `Show Passwords` to check)');//A@
   passwordForm.reset();
   renderLatestPassword();
+  passwordForm.scrollIntoView({ behavior: "smooth" }); //A@
   location.reload(); //A@
-  passwordForm.scrollIntoView({ behavior: "smooth" });
 });
 
 // Handle show passwords button click
@@ -142,6 +142,7 @@ const deletePasswordUsable = (url, username, password) => {
 passwordList.addEventListener('click', (event) => {
   if (event.target.classList.contains('delete-history-button')) {
     deletePassword(); //M@
+    alert('Credential deleted!');//A@
   }
 });
 
@@ -162,26 +163,54 @@ passwordList.addEventListener('click', (event) => {
 });
 
 
+
 // Handle download as PDF button click
-document.getElementById("download-pdf-button").addEventListener("click", function () {
-  const passwordTable = document.getElementById("password-table");
-  const passwordList = document.getElementById("password-list");
+downloadPdfButton.addEventListener('click', () => {
+  // Define document definition object
+  const docDefinition = {
+    content: [
+      { text: 'Password History', style: 'header' },
+      '\n\n',
+      {
+        table: {
+          headerRows: 1,
+          widths: ['*', '*', '*'],
+          body: [
+            ['URL', 'Username', 'Password'],
+            ...(JSON.parse(localStorage.getItem('passwords')) || [])
+              .map(({ url, username, password }) =>
+                [url, username, password].filter(Boolean)
+              )
+              .filter(row => row.length === 3)
+          ]
+        }
+      }
+    ],
+    styles: {
+      header: {
+        fontSize: 18,
+        bold: true,
+        alignment: 'center',
+        font: 'Roboto'
+      }
+    }
+  };
 
-  // Create a new instance of the jsPDF object
-  var doc = new jsPDF();
 
-  // Add the data from the password table to the PDF
-  for (var i = 0; i < passwordList.rows.length; i++) {
-    var url = passwordList.rows[i].cells[0].innerHTML;
-    var username = passwordList.rows[i].cells[1].innerHTML;
-    var password = passwordList.rows[i].cells[2].innerHTML;
+  // Define fonts for PDF document
+  pdfMake.fonts = {
+    Roboto: {
+      normal: 'https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxP.ttf',
+      bold: 'https://fonts.gstatic.com/s/roboto/v27/KFOlCnqEu92Fr1MmWUlfBBc9.ttf',
+      italic: 'https://fonts.gstatic.com/s/roboto/v27/KFOkCnqEu92Fr1Mu52xIIzIXKMny.ttf',
+      bolditalic: 'https://fonts.gstatic.com/s/roboto/v27/KFOjCnqEu92Fr1Mu51S7ACc6CsE.ttf'
+    }
+  };
 
-    doc.text(20, 20 + (i * 10), url + " / " + username + " / " + password);
-  }
-
-  // Download the PDF
-  doc.save("passwords.pdf");
+  // Generate and download PDF
+  pdfMake.createPdf(docDefinition).download('password_history.pdf');
 });
+
 
 renderLatestPassword();
 
