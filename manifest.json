@@ -1,19 +1,30 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "PassManage",
   "version": "1.0.0",
   "description": "A chrome extension to manage your passwords locally and securely.",
-  "browser_action": {
+  "action": {
     "default_popup": "popup.html"
   },
+  "host_permissions": [
+    "activeTab"
+  ],
   "permissions": [
-    "activeTab",
     "storage"
   ],
-  "content_security_policy": "script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; object-src 'self'",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
   "web_accessible_resources": [
-    "index.html",
-    "background.js",
-    "bulma.min.css"
+    {
+      "resources": [
+        "index.html",
+        "background.js",
+        "bulma.min.css"
+      ],
+      "matches": [
+        "https://*/*"
+      ]
+    }
   ]
 }
