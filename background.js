@@ -176,7 +176,7 @@ downloadPdfButton.addEventListener('click', () => {
           headerRows: 1,
           widths: ['*', '*', '*'],
           body: [
-            ['URL', 'Username', 'Password'],
+            [{ text: 'URL', bold: true}, { text: 'Username', bold: true }, { text: 'Password', bold: true }],
             ...(JSON.parse(localStorage.getItem('passwords')) || [])
               .map(({ url, username, password }) =>
                 [url, username, password].filter(Boolean)
