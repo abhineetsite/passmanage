@@ -77,7 +77,6 @@ function maskPassword(password, masked, url) {
   if (masked) {
     return "#".repeat(password.length);
   } else {
-    console.log(password)
     for (var i = 0; i < passwords.length; i++) {
       console.log(passwords[i].url + '  ' + url)
       if (passwords[i].url == url) {
@@ -86,7 +85,6 @@ function maskPassword(password, masked, url) {
       }
     }
     //passwords.forEach(pass => {console.log(pass.url + ' ' + url); if (pass.url == url){console.log('pass.url' + pass.url + 'url' + url); password=pass.password;}});
-    console.log('changed ' + password)
     return password;
   }
 }
@@ -159,11 +157,18 @@ const deletePassword = () => {
   let url = passwordRow.children[0].textContent;
   let username = passwordRow.children[1].textContent;
   let password = passwordRow.children[2].textContent;
-  let passwords = JSON.parse(localStorage.getItem('passwords')) || [];
-  passwords = passwords.filter(passwordData => {
-    return passwordData.url !== url || passwordData.username !== username || passwordData.password !== password;
-  });
-  localStorage.setItem('passwords', JSON.stringify(passwords));
+  //M@ Start
+  if (password.includes("#")) {
+    alert('Please unmask password to delete');
+  } else {
+    let passwords = JSON.parse(localStorage.getItem('passwords')) || [];
+    passwords = passwords.filter(passwordData => {
+      return passwordData.url !== url || passwordData.username !== username || passwordData.password !== password;
+    });
+    localStorage.setItem('passwords', JSON.stringify(passwords));
+    alert('Credential deleted!');//A@
+  }
+  //M@ End
   renderPasswordHistory();
 };
 
@@ -180,7 +185,7 @@ const deletePasswordUsable = (url, username, password) => {
 passwordList.addEventListener('click', (event) => {
   if (event.target.classList.contains('delete-history-button')) {
     deletePassword(); //M@
-    alert('Credential deleted!');//A@
+    //alert('Credential deleted!');//D@
   }
 });
 
@@ -191,11 +196,18 @@ passwordList.addEventListener('click', (event) => {
     let url = passwordRow.children[0].textContent;
     let username = passwordRow.children[1].textContent;
     let password = passwordRow.children[2].textContent;
-    urlInput.value = url;
-    usernameInput.value = username;
-    passwordInput.value = password;
     //A@ delete current password from password history
-    deletePasswordUsable(url, username, password);
+    //M@ Start
+    if (password.includes("#")) {
+      alert('Please unmask password to edit');
+    } else {
+      urlInput.value = url;
+      usernameInput.value = username;
+      passwordInput.value = password;
+      deletePasswordUsable(url, username, password);
+    }
+    //M@ End
+    //deletePasswordUsable(url, username, password); //D@
     window.scrollTo(0, 0);
   }
 });
@@ -214,7 +226,7 @@ downloadPdfButton.addEventListener('click', () => {
           headerRows: 1,
           widths: ['*', '*', '*'],
           body: [
-            [{ text: 'URL', bold: true}, { text: 'Username', bold: true }, { text: 'Password', bold: true }],
+            [{ text: 'URL', bold: true }, { text: 'Username', bold: true }, { text: 'Password', bold: true }],
             ...(JSON.parse(localStorage.getItem('passwords')) || [])
               .map(({ url, username, password }) =>
                 [url, username, password].filter(Boolean)
