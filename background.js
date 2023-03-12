@@ -41,17 +41,55 @@ const renderPasswordHistory = () => {
   passwords.forEach(password => {
     let passwordRow = document.createElement('tr');
     passwordRow.innerHTML = `
-      <td>${password.url}</td>
+      <td class="url">${password.url}</td>
       <td>${password.username}</td>
-      <td>${password.password}</td>
+      <td><span class="password-span">${maskPassword(password.password, true)}</span></td>
       <td>
         <button class="edit-history-button">Edit</button>
         <button class="delete-history-button">Delete</button>
+        <button class="show-password-button">Show</button>
       </td>
     `;
     passwordList.appendChild(passwordRow);
   });
+
+  // A@Add event listeners to all show password buttons
+  let showPasswordButtons = document.querySelectorAll(".show-password-button");
+  showPasswordButtons.forEach(showPasswordButton => {
+    showPasswordButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      var passwordSpan = showPasswordButton.parentNode.previousElementSibling.querySelector(".password-span");
+      let url = showPasswordButton.parentNode.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
+      if (passwordSpan.textContent.includes("#")) {
+        passwordSpan.textContent = maskPassword(passwordSpan.textContent, false, url);
+        showPasswordButton.textContent = "Hide";
+      } else {
+        passwordSpan.textContent = maskPassword(passwordSpan.textContent, true, url);
+        showPasswordButton.textContent = "Show";
+      }
+    });
+  });
 };
+
+//A@mask password in password history
+function maskPassword(password, masked, url) {
+  let passwords = JSON.parse(localStorage.getItem('passwords')) || [];
+  if (masked) {
+    return "#".repeat(password.length);
+  } else {
+    console.log(password)
+    for (var i = 0; i < passwords.length; i++) {
+      console.log(passwords[i].url + '  ' + url)
+      if (passwords[i].url == url) {
+        password = passwords[i].password;
+        break;
+      }
+    }
+    //passwords.forEach(pass => {console.log(pass.url + ' ' + url); if (pass.url == url){console.log('pass.url' + pass.url + 'url' + url); password=pass.password;}});
+    console.log('changed ' + password)
+    return password;
+  }
+}
 
 // Show password history
 const showPasswordHistory = () => {

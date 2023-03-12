@@ -16,9 +16,12 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "index.html",
+        "popup.html",
         "background.js",
-        "bulma.min.css"
+        "bulma.min.css",
+        "style.css",
+        "html2canvas.min.js",
+        "pdfmake.min.js"
       ],
       "matches": [
         "https://*/*"
